@@ -4,27 +4,32 @@ const secondDropdown = document.getElementById("secondDropdown");
 const categoryDropdown = document.getElementById("categoryDropdown");
 const categoriesURl = "http://localhost:8081/api/categories";
 const productsURL = "http://localhost:8081/api/products";
-console.log(categoriesURl);
+const displayProducts=document.getElementById("displayProducts")
+
 window.onload = init;
 
 function init() {
   searchDropdown.onchange = onSearchDropdownChanged;
+  secondDropdown.onchange=onSecondDropdownChanged
 }
 
 function onSearchDropdownChanged() {
+   displayProducts.replaceChildren('')
   if (searchDropdown.value == "searchByCategory") {
     fetch(categoriesURl)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        
         for (let category of data) {
-          let theOption = new Option(category.Name);
+          let theOption = new Option(category.name,category.categoryId);
+        
           secondDropdown.appendChild(theOption);
         }
       });
   }
 
   if (searchDropdown.value == "viewAll") {
+  
     fetch(productsURL)
       .then((response) => response.json())
       .then((data) => {
@@ -35,8 +40,25 @@ function onSearchDropdownChanged() {
   }
 }
 
+function onSecondDropdownChanged(){
+  displayProducts.replaceChildren('')
+  let selectedValue = secondDropdown.value
+  fetch(productsURL)
+      .then((response) => response.json())
+      .then((data) => {
+     let selectedCategoryItems=data.filter((product) => product.categoryId == selectedValue)
+     selectedCategoryItems.forEach(element => addtoCard(element))
+        }
+
+       
+      )
+   
+}
+
+
+
 function addtoCard(product) {
-  const displayProducts=document.getElementById("displayProducts")
+  
   let cardItemDiv = document.createElement("div");
   cardItemDiv.className = "card";
   displayProducts.appendChild(cardItemDiv);
