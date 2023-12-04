@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Search Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -30,19 +30,27 @@
 
 
     <div class="container">
-        <div class="row">
+        <div class="row mt-4">
             <div class="col">
-                <select id=initialDropdown class="form-select" aria-label="Default select example">
-                    <option selected>Select One</option>
-                    <option selected>Search By Category</option>
-                    <option selected>View All</option>
-                  </select>
+                <select id=searchDropdown class="form-select" aria-label="Default select example">
+                    <option value="selectOne">Select One</option>
+                    <option value="searchByCategory">Search By Category</option>
+                    <option value="viewAll">View All</option>
+                </select>
             </div>
 
             <div class="col">
-                <select id=categoryDropdown class="form-select" aria-label="Default select example">
-                
-                  </select>
+                <select id=secondDropdown class="form-select" aria-label="Default select example">
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div id="displayProducts">
+
+                </div>
             </div>
         </div>
     </div>
