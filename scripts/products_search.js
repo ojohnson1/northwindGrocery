@@ -15,6 +15,7 @@ function init() {
 
 function onSearchDropdownChanged() {
    displayProducts.replaceChildren('')
+   secondDropdown.replaceChildren('')
   if (searchDropdown.value == "searchByCategory") {
     fetch(categoriesURl)
       .then((response) => response.json())
@@ -80,8 +81,14 @@ function addtoCard(product) {
   cardDescriptionParagraph.className = "card-text";
   cardBody.appendChild(cardDescriptionParagraph);
   let cardDescriptionParagraphText = document.createTextNode(
-   `Unit Price: ${Number(product.unitPrice).toFixed(2)}
+   `Unit Price: $${Number(product.unitPrice).toFixed(2)}
   Product Id: ${product.productId}`
   );
+ 
   cardDescriptionParagraph.appendChild(cardDescriptionParagraphText);
+
+  let anchor= document.createElement('a')
+  anchor.href= `/details.html?productId=${product.productId}`;
+  anchor.text = " See details"; 
+  cardDescriptionParagraph.appendChild(anchor)
 }
